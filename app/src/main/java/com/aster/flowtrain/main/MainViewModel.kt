@@ -12,5 +12,6 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     domainTest: DomainTest
 ): ViewModel() {
-    val a = domainTest.a()
+
+    val a = domainTest.execute("a")
 }

@@ -15,7 +15,7 @@ abstract class FlowUseCase<P, R> (
     @DispatcherIO private val threadExecutor: CoroutineDispatcher
 ) : CoroutineScope by CoroutineScope(threadExecutor) {
 
-    abstract fun buildUseCase(params: P): Flow<Result<R>>
+    protected abstract fun buildUseCase(params: P): Flow<Result<R>>
 
     fun execute(params: P): Flow<Result<R>> =
         buildUseCase(params)

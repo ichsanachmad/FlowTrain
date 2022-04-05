@@ -13,7 +13,8 @@ abstract class BaseUseCase<P, R>(
     @DispatcherIO private val threadExecutor: CoroutineDispatcher,
     @DispatcherMain private val postExecutor: CoroutineDispatcher
 ) : CoroutineScope by CoroutineScope(threadExecutor) {
-    abstract suspend fun buildUseCase(params: P): Result<R>
+
+    protected abstract suspend fun buildUseCase(params: P): Result<R>
 
     private val supervisorJob = SupervisorJob()
 

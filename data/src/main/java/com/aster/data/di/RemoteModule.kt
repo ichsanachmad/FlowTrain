@@ -51,14 +51,15 @@ object RemoteModule {
     }
 
     @Provides
-    fun providesRetrofitBuilder(okHttpClientNews: OkHttpClient): Retrofit.Builder {
+    fun providesRetrofitBuilder(): Retrofit.Builder {
         return Retrofit.Builder()
-            .client(okHttpClientNews)
             .addConverterFactory(GsonConverterFactory.create())
     }
 
     @Provides
-    fun providesRetrofitNews(retrofitBuilder: Retrofit.Builder): Retrofit {
-        return retrofitBuilder.baseUrl(BuildConfig.API_URL).build()
+    fun providesRetrofitNews(okHttpClientNews: OkHttpClient, retrofitBuilder: Retrofit.Builder): Retrofit {
+        return retrofitBuilder
+            .client(okHttpClientNews)
+            .baseUrl(BuildConfig.API_URL).build()
     }
 }

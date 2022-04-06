@@ -1,5 +1,4 @@
 *.iml
-news.properties
 .gradle
 /local.properties
 /.idea/caches
@@ -15,3 +14,4 @@ news.properties
 .externalNativeBuild
 .cxx
 local.properties
+news.properties

@@ -1,4 +1,4 @@
-package com.aster.data.base
+package com.aster.data.base.remote
 
 import com.aster.domain.base.Result
 import com.aster.domain.base.response.BaseResponse

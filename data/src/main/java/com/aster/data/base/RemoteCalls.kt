@@ -14,7 +14,7 @@ import kotlin.Exception
  * @author ichsanachmad
  */
 
-inline fun <reified T : Any> flowSafeNetworkCall(crossinline response: () -> Response<BaseResponse<T>>): Flow<Result<T>> {
+suspend inline fun <reified T : Any> flowSafeNetworkCall(crossinline response: suspend () -> Response<BaseResponse<T>>): Flow<Result<T>> {
     return flow {
         try {
             when (response().code()) {
@@ -44,31 +44,31 @@ inline fun <reified T : Any> flowSafeNetworkCall(crossinline response: () -> Res
     }
 }
 
-inline fun <reified T : Any> safeNetworkCall(crossinline response: () -> Response<BaseResponse<T>>): Result<T> {
+suspend inline fun <reified T : Any> safeNetworkCall(crossinline response: suspend () -> Response<BaseResponse<T>>): Result<T> {
     return try {
-            when (response().code()) {
-                in 200..226,
-                in 300..308 -> {
-                    Result.Success(response().body()?.articles)
-                }
-                in 400..451 -> {
-                    Result.Error(Exception(response().getError()))
-                }
-                in 500..511 -> {
-                    Result.Error(Exception(response().getError()))
-                }
+        when (response().code()) {
+            in 200..226,
+            in 300..308 -> {
+                Result.Success(response().body()?.articles)
+            }
+            in 400..451 -> {
+                Result.Error(Exception(response().getError()))
+            }
+            in 500..511 -> {
+                Result.Error(Exception(response().getError()))
+            }
 
-                else -> throw IllegalStateException()
+            else -> throw IllegalStateException()
+        }
+    } catch (e: SocketException) {
+        Result.Error(e)
+    } catch (e: Exception) {
+        when (e) {
+            is ConnectException, is UnknownHostException -> {
+                Result.Error(e)
             }
-        } catch (e: SocketException) {
-            Result.Error(e)
-        } catch (e: Exception) {
-            when (e) {
-                is ConnectException, is UnknownHostException -> {
-                    Result.Error(e)
-                }
-                else -> throw e
-            }
+            else -> throw e
+        }
 
     }
 }

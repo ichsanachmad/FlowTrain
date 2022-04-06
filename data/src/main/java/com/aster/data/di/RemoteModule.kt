@@ -1,6 +1,7 @@
 package com.aster.data.di
 
 import com.aster.data.BuildConfig
+import com.aster.data.retrofit.NewsRetrofit
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,6 +58,7 @@ object RemoteModule {
     }
 
     @Provides
+    @NewsRetrofit
     fun providesRetrofitNews(okHttpClientNews: OkHttpClient, retrofitBuilder: Retrofit.Builder): Retrofit {
         return retrofitBuilder
             .client(okHttpClientNews)

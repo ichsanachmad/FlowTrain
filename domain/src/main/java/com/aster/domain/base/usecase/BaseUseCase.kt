@@ -29,7 +29,9 @@ abstract class BaseUseCase<P, R>(
             when (val result = buildUseCase(param)) {
                 is Result.Success -> {
                     withContext(postExecutor) {
-                        onSuccess(result.data)
+                        result.data?.let {
+                            onSuccess(it)
+                        }
                     }
                 }
 

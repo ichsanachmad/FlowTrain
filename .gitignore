@@ -1,4 +1,5 @@
 *.iml
+news.properties
 .gradle
 /local.properties
 /.idea/caches

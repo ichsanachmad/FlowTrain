@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        mainViewModel.get()
         NavigationUI.setupWithNavController(binding.bottomNav, navHostFragment.navController)
     }
 }

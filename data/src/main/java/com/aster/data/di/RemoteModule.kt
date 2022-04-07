@@ -40,12 +40,12 @@ object RemoteModule {
 
     @Provides
     fun providesOkHttpNews(okHttpClient: OkHttpClient.Builder): OkHttpClient {
-        val httpUrl = HttpUrl.Builder()
-            .setQueryParameter(API_KEY, BuildConfig.API_KEY)
-            .build()
-
         return okHttpClient
             .addInterceptor { chain ->
+                val httpUrl = chain.request().url.newBuilder()
+                    .addQueryParameter(API_KEY, BuildConfig.API_KEY)
+                    .build()
+
                 val request = chain.request().newBuilder().url(httpUrl).build()
                 chain.proceed(request)
             }.build()

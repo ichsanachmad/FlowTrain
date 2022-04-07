@@ -40,6 +40,7 @@ abstract class BaseUseCase<P, R>(
                         onError(result.exception)
                     }
                 }
+                else -> Result.Loading
             }
         }
     }

@@ -8,14 +8,14 @@ import com.aster.domain.article.model.Article
 import com.aster.domain.base.Result
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMap
-import kotlinx.coroutines.flow.flatMapConcat
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * @author ichsanachmad
  */
 @FlowPreview
+@Singleton
 class ArticleEntityRepository @Inject constructor(
     private val articleDataFactory: ArticleDataFactory
 ) : ArticleRepository {

@@ -1,8 +1,13 @@
 package com.aster.flowtrain.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.aster.domain.DomainTest
+import com.aster.domain.base.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -10,8 +15,11 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    domainTest: DomainTest
+    private val domainTest: DomainTest
 ): ViewModel() {
+    fun get(){
+        viewModelScope.launch {
 
-    val a = domainTest.execute("a")
+        }
+    }
 }

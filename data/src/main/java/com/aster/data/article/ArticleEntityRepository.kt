@@ -1,6 +1,7 @@
 package com.aster.data.article
 
 import com.aster.data.article.mapper.mapToArticleList
+import com.aster.data.article.model.request.ArticleRequestParam
 import com.aster.data.base.mapper.mapResultFlow
 import com.aster.data.base.source.DataSource
 import com.aster.domain.article.ArticleRepository
@@ -20,8 +21,14 @@ class ArticleEntityRepository @Inject constructor(
     private val articleDataFactory: ArticleDataFactory
 ) : ArticleRepository {
 
-    override suspend fun getArticles(): Flow<Result<List<Article>>> {
-        return articleNetworkDataFactory.getArticles().mapResultFlow {
+    override suspend fun getArticles(trendCategory: String): Flow<Result<List<Article>>> {
+        val articleRequestParam = ArticleRequestParam(
+            query = trendCategory,
+            from = "",
+            to = "",
+            sortBy = ""
+        )
+        return articleNetworkDataFactory.getArticles(articleRequestParam).mapResultFlow {
             it.mapToArticleList()
         }
     }

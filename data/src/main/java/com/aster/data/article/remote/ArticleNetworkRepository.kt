@@ -1,6 +1,7 @@
 package com.aster.data.article.remote
 
 import com.aster.data.article.ArticleEntityData
+import com.aster.data.article.model.request.ArticleRequestParam
 import com.aster.data.article.model.response.ArticleResponse
 import com.aster.data.base.remote.flowSafeNetworkCall
 import com.aster.domain.base.Result
@@ -15,9 +16,16 @@ import javax.inject.Singleton
 class ArticleNetworkRepository @Inject constructor(
     private val articleRemoteDataSource: ArticleRemoteDataSource
 ) : ArticleEntityData {
-    override suspend fun getArticles(): Flow<Result<List<ArticleResponse>>> {
+    override suspend fun getArticles(articleRequestParam: ArticleRequestParam): Flow<Result<List<ArticleResponse>>> {
         return flowSafeNetworkCall {
-            articleRemoteDataSource.getArticles("apple", "", "", "")
+            articleRequestParam.let {
+                articleRemoteDataSource.getArticles(
+                    it.query ?: "",
+                    it.from ?: "",
+                    it.to ?: "",
+                    it.sortBy ?: ""
+                )
+            }
         }
     }
 }

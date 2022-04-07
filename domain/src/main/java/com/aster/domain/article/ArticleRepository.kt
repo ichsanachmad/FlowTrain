@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
  * @author ichsanachmad
  */
 interface ArticleRepository {
-    suspend fun getArticles(): Flow<Result<List<Article>>>
+    suspend fun getArticles(trendCategory: String): Flow<Result<List<Article>>>
 }

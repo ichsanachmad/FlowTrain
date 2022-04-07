@@ -1,4 +1,4 @@
-package com.aster.domain
+package com.aster.domain.article.interactor
 
 import com.aster.domain.annotation.DispatcherIO
 import com.aster.domain.article.ArticleRepository
@@ -12,11 +12,11 @@ import javax.inject.Inject
 /**
  * @author ichsanachmad
  */
-class DomainTest @Inject constructor(
-    private val articleRepository: ArticleRepository,
-    @DispatcherIO private val threadExecutor: CoroutineDispatcher
-) : FlowUseCase<String, List<Article>>(threadExecutor) {
+class GetArticles @Inject constructor(
+    @DispatcherIO threadExecutor: CoroutineDispatcher,
+    private val articleRepository: ArticleRepository
+):FlowUseCase<String, List<Article>>(threadExecutor) {
     override suspend fun buildUseCase(params: String): Flow<Result<List<Article>>> {
-        return articleRepository.getArticles()
+        return articleRepository.getArticles(params)
     }
 }

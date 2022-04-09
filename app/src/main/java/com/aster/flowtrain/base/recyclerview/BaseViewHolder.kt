@@ -13,7 +13,7 @@ abstract class BaseViewHolder<T>(itemView: ViewBinding) : RecyclerView.ViewHolde
         itemView.setOnClickListener { listener?.onClick(adapterPosition) }
     }
 
-    interface OnItemClickListener {
+    fun interface OnItemClickListener {
         fun onClick(position: Int)
     }
 }

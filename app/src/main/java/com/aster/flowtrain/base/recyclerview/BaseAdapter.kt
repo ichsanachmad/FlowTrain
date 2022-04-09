@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 abstract class BaseAdapter<VH : BaseViewHolder<T>, T> : RecyclerView.Adapter<VH>() {
     private val items: MutableList<T> = mutableListOf()
-    private val onItemClickListener: BaseViewHolder.OnItemClickListener? = null
+    private var onItemClickListener: BaseViewHolder.OnItemClickListener? = null
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.apply {
@@ -18,6 +18,10 @@ abstract class BaseAdapter<VH : BaseViewHolder<T>, T> : RecyclerView.Adapter<VH>
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun setOnItemClickListener(itemClickListener: BaseViewHolder.OnItemClickListener) {
+        this.onItemClickListener = itemClickListener
+    }
 
     fun updateItems(list: List<T>) {
         val diff = DiffUtil.calculateDiff(BaseDiffUtil(items, list))

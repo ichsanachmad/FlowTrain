@@ -1,10 +1,8 @@
-package com.aster.flowtrain.base
+package com.aster.flowtrain.base.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author ichsanachmad
@@ -20,6 +18,6 @@ abstract class BaseActivity<Binding : ViewBinding> :
         init()
     }
 
-    protected abstract fun init()
     protected abstract fun getViewBinding(): Binding
+    protected abstract fun init()
 }

@@ -47,4 +47,12 @@ class ArticlesAdapter @Inject constructor() :
             itemView.rootView.setMargins(null, null, null, dpToPx(16f))
         }
     }
+
+    override fun areContentsSame(
+        oldItemPosition: Int,
+        newItems: List<Article>,
+        newItemPosition: Int
+    ): Boolean {
+        return getItems()[oldItemPosition].title == newItems[newItemPosition].title
+    }
 }

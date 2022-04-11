@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.flowOf
 inline fun <T, R> Flow<Result<T>>.mapResultFlow(crossinline transform: (res: T?) -> R): Flow<Result<R>> {
     return flatMapConcat {
         when (it) {
+            is Result.Initial -> flowOf(it)
             is Result.Success -> flowOf(Result.Success(transform(it.data)))
             is Result.Error -> flowOf(it)
             is Result.Loading -> flowOf(it)

@@ -12,7 +12,6 @@ import com.aster.domain.user.interactor.SetUserName
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,19 +25,17 @@ class MainViewModel @Inject constructor(
     private val getUserName: GetUserName
 ) : ViewModel() {
     private val _articleStateFlow = MutableStateFlow<Result<List<Article>>>(
-        Result.Success(
-            mutableListOf()
-        )
+        Result.Initial
     )
     val articleStateFlow: StateFlow<Result<List<Article>>> get() = _articleStateFlow
 
     private val _setNameStateFlow = MutableStateFlow<Result<NoParams>>(
-        Result.Loading
+        Result.Initial
     )
     val setNameStateFlow: StateFlow<Result<NoParams>> get() = _setNameStateFlow
 
     private val _getNameStateFlow = MutableStateFlow<Result<String>>(
-        Result.Success("")
+        Result.Initial
     )
     val getNameStateFlow: StateFlow<Result<String>> get() = _getNameStateFlow
 

@@ -13,9 +13,7 @@ import com.aster.flowtrain.home.adapter.ArticlesAdapter
 import com.aster.flowtrain.home.dialog.AskNameDialog
 import com.aster.flowtrain.main.MainViewModel
 import com.aster.webcontainer.WebContainer
-import com.aster.webcontainer.extension.isUrl
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -72,14 +70,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             mainViewModel.getNameStateFlow.collect {
                 when (it) {
                     is Result.Success -> {
-                        if (it.data.isNullOrEmpty()) {
-                            showAskNameDialog()
-                        } else {
-                            Toast.makeText(
-                                requireActivity(),
-                                "Hello ${it.data}",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                        it.data?.let { name->
+                            if (name.isEmpty()) {
+                                showAskNameDialog()
+                            } else {
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "Hello ${it.data}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
 

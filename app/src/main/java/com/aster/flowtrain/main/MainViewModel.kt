@@ -33,7 +33,7 @@ class MainViewModel @Inject constructor(
     val articleStateFlow: StateFlow<Result<List<Article>>> get() = _articleStateFlow
 
     private val _setNameStateFlow = MutableStateFlow<Result<NoParams>>(
-        Result.Success(NoParams)
+        Result.Loading
     )
     val setNameStateFlow: StateFlow<Result<NoParams>> get() = _setNameStateFlow
 

@@ -10,19 +10,21 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * @author ichsanachmad
  */
+@Singleton
 class UserLocalRepository @Inject constructor(@ApplicationContext private val context: Context) :
     UserEntityData {
 
     companion object {
         private const val USER_PREF = "user_preference"
         private const val USER_NAME_KEY = "user_name_key"
+        private val Context.userDataStore by preferencesDataStore(name = USER_PREF)
     }
 
-    private val Context.userDataStore by preferencesDataStore(name = USER_PREF)
     private val userNamePrefKey = stringPreferencesKey(USER_NAME_KEY)
 
     override suspend fun setUserName(name: String) {

@@ -11,7 +11,7 @@ import androidx.viewbinding.ViewBinding
  * @author ichsanachmad
  */
 abstract class BaseDialogFragment<Binding: ViewBinding> : DialogFragment() {
-    open val binding: Binding by lazy { getViewBinding() }
+    protected val binding: Binding by lazy { getViewBinding() }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseActivity<Binding : ViewBinding> :
     AppCompatActivity() {
 
-    open val binding by lazy { getViewBinding() }
+    protected val binding by lazy { getViewBinding() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

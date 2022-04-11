@@ -11,7 +11,7 @@ import androidx.viewbinding.ViewBinding
  * @author ichsanachmad
  */
 abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
-    open val binding by lazy { getViewBinding() }
+    protected val binding by lazy { getViewBinding() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

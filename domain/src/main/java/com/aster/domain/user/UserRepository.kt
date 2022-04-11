@@ -1,5 +1,6 @@
 package com.aster.domain.user
 
+import com.aster.domain.base.Result
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -7,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
  */
 interface UserRepository {
     suspend fun setName(name: String)
-    suspend fun getName(): Flow<String>
+    suspend fun getName(): Flow<Result<String>>
 }

@@ -18,7 +18,7 @@ abstract class BaseUseCase<P, R>(
 
     private val supervisorJob = SupervisorJob()
 
-    fun invoke(param: P, onSuccess: (result: R) -> Unit, onError: (e: Exception) -> Unit) {
+    fun invoke(param: P, onSuccess: suspend (result: R) -> Unit, onError: suspend (e: Exception) -> Unit) {
         val errorHandler = CoroutineExceptionHandler { _, throwable ->
             launch {
                 onError(Exception(throwable))

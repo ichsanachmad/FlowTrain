@@ -1,5 +1,6 @@
 package com.aster.data.user
 
+import com.aster.domain.base.Result
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -7,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
  */
 interface UserEntityData {
     suspend fun setUserName(name: String)
-    suspend fun getUserName(): Flow<String>
+    suspend fun getUserName(): Flow<Result<String>>
 }

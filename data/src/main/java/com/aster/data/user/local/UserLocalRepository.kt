@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.aster.data.user.UserEntityData
+import com.aster.domain.base.Result
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -30,7 +31,7 @@ class UserLocalRepository @Inject constructor(@ApplicationContext private val co
         }
     }
 
-    override suspend fun getUserName(): Flow<String> =
-        context.userDataStore.data.map { it[userNamePrefKey] ?: "" }
+    override suspend fun getUserName(): Flow<Result<String>> =
+        context.userDataStore.data.map { Result.Success(it[userNamePrefKey] ?: "") }
 
 }

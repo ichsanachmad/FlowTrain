@@ -1,6 +1,7 @@
 package com.aster.data.user
 
 import com.aster.data.base.source.DataSource
+import com.aster.domain.base.Result
 import com.aster.domain.user.UserRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -14,7 +15,7 @@ class UserEntityRepository @Inject constructor(private val userDataFactory: User
         userLocalDataFactory.setUserName(name)
     }
 
-    override suspend fun getName(): Flow<String> = userLocalDataFactory.getUserName()
+    override suspend fun getName(): Flow<Result<String>> = userLocalDataFactory.getUserName()
 
     private val userLocalDataFactory by lazy { userDataFactory.generateDataSource(DataSource.LOCAL) }
 }

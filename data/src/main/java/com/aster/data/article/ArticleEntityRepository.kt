@@ -33,8 +33,8 @@ class ArticleEntityRepository @Inject constructor(
             when (it) {
                 is Result.Success -> {
                     articleLocalDataFactory.insertArticles(
-                        it.data?.map { articles -> articles.toArticleEntity() }
-                            ?: listOf())
+                        it.data?.map { articles -> articles.toArticleEntity() }.orEmpty()
+                    )
                     flowOf(it)
                 }
 

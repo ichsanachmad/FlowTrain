@@ -1,4 +1,4 @@
-package com.aster.data.article.module
+package com.aster.data.article.remote.module
 
 import com.aster.data.article.remote.ArticleRemoteDataSource
 import com.aster.data.retrofit.NewsRetrofit

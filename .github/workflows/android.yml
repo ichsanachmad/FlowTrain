@@ -19,10 +19,17 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-
+    - name: Add News Properties (Ignored)
+      env: 
+        NEWS_PROPERTIES: ${{ secrets.NEWS_PROPERTIES }}
+      shell: bash
+      run: echo ${NEWS_PROPERTIES} > news.properties
+      
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      
     - name: Build with Gradle
       run: ./gradlew build
+      
     - name: Run unit testing
       run: ./gradlew test
